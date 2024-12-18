@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Model Viewer</title>
-  <!-- Model-Viewer Library -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
     }
     h1 {
       text-align: center;
@@ -25,25 +25,24 @@
 </head>
 <body>
   <h1>AR Model Viewer</h1>
-  <!-- Model Viewer with Extra AR Modes -->
   <model-viewer 
     src="untitled.usdz" 
     alt="3D Model in AR" 
     ar 
-    ar-modes="webxr scene-viewer quick-look" 
-    camera-controls 
-    auto-rotate 
+    ar-modes="quick-look" 
+    poster="https://via.placeholder.com/600x400?text=Loading+Model..."
+    environment-image="neutral"
     shadow-intensity="1"
-    style="width: 100%; height: 80vh;">
-    <!-- Fallback Message -->
+    auto-rotate 
+    camera-controls>
     <div slot="poster">Loading 3D Model...</div>
   </model-viewer>
 
-  <!-- Optional Debugging JavaScript -->
   <script>
-    document.querySelector('model-viewer').addEventListener('error', (event) => {
-      console.error('Error loading model:', event.detail);
-      alert("Failed to load the 3D model. Please check the file path and try again.");
+    const viewer = document.querySelector('model-viewer');
+    viewer.addEventListener('error', (e) => {
+      console.error('Error loading model:', e.detail.message);
+      alert("The model failed to load. Please check the file path or format.");
     });
   </script>
 </body>
